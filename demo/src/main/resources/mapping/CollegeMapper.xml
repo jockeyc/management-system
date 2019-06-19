@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.demo.dao.CollegeMapper">
+  <resultMap id="BaseResultMap" type="demo.demo.model.College">
+    <result column="yxh" jdbcType="NCHAR" property="yxh" />
+    <result column="mc" jdbcType="NCHAR" property="mc" />
+    <result column="dz" jdbcType="NCHAR" property="dz" />
+    <result column="lxdh" jdbcType="NCHAR" property="lxdh" />
+  </resultMap>
+  <insert id="insert" parameterType="demo.demo.model.College">
+    insert into D (yxh, mc, dz, lxdh
+      )
+    values (#{yxh,jdbcType=NCHAR}, #{mc,jdbcType=NCHAR}, #{dz,jdbcType=NCHAR}, #{lxdh,jdbcType=NCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="demo.demo.model.College">
+    insert into D
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="yxh != null">
+        yxh,
+      </if>
+      <if test="mc != null">
+        mc,
+      </if>
+      <if test="dz != null">
+        dz,
+      </if>
+      <if test="lxdh != null">
+        lxdh,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="yxh != null">
+        #{yxh,jdbcType=NCHAR},
+      </if>
+      <if test="mc != null">
+        #{mc,jdbcType=NCHAR},
+      </if>
+      <if test="dz != null">
+        #{dz,jdbcType=NCHAR},
+      </if>
+      <if test="lxdh != null">
+        #{lxdh,jdbcType=NCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

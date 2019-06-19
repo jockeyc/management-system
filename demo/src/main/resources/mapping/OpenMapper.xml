@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.demo.dao.OpenMapper">
+  <resultMap id="BaseResultMap" type="demo.demo.model.Open">
+    <result column="xq" jdbcType="NCHAR" property="xq" />
+    <result column="kh" jdbcType="NCHAR" property="kh" />
+    <result column="gh" jdbcType="NCHAR" property="gh" />
+    <result column="sksj" jdbcType="NCHAR" property="sksj" />
+  </resultMap>
+  <insert id="insert" parameterType="demo.demo.model.Open">
+    insert into O (xq, kh, gh, sksj
+      )
+    values (#{xq,jdbcType=NCHAR}, #{kh,jdbcType=NCHAR}, #{gh,jdbcType=NCHAR}, #{sksj,jdbcType=NCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="demo.demo.model.Open">
+    insert into O
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="xq != null">
+        xq,
+      </if>
+      <if test="kh != null">
+        kh,
+      </if>
+      <if test="gh != null">
+        gh,
+      </if>
+      <if test="sksj != null">
+        sksj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="xq != null">
+        #{xq,jdbcType=NCHAR},
+      </if>
+      <if test="kh != null">
+        #{kh,jdbcType=NCHAR},
+      </if>
+      <if test="gh != null">
+        #{gh,jdbcType=NCHAR},
+      </if>
+      <if test="sksj != null">
+        #{sksj,jdbcType=NCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

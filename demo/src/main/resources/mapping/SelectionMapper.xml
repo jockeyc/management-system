@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.demo.dao.SelectionMapper">
+  <resultMap id="BaseResultMap" type="demo.demo.model.Selection">
+    <result column="xh" jdbcType="NCHAR" property="xh" />
+    <result column="xq" jdbcType="NCHAR" property="xq" />
+    <result column="kh" jdbcType="NCHAR" property="kh" />
+    <result column="gh" jdbcType="NCHAR" property="gh" />
+    <result column="pscj" jdbcType="INTEGER" property="pscj" />
+    <result column="kscj" jdbcType="INTEGER" property="kscj" />
+    <result column="zpcj" jdbcType="INTEGER" property="zpcj" />
+  </resultMap>
+  <insert id="insert" parameterType="demo.demo.model.SelectInfo">
+    insert into E (xh, xq, kh, gh, 
+      pscj, kscj, zpcj)
+    values (#{xh,jdbcType=NCHAR}, #{semester,jdbcType=NCHAR}, #{kh,jdbcType=NCHAR}, #{gh,jdbcType=NCHAR},
+      NULL,NULL,NULL)
+  </insert>
+
+  <delete id="delete" parameterType="demo.demo.model.SelectInfo">
+    delete from E
+    where xh=#{xh} and xq=#{semester} and kh=#{kh} and gh=#{gh}
+  </delete>
+
+  <select id="hasSame" parameterType="demo.demo.model.SelectInfo" resultType="boolean">
+    select count(xh) from E
+    where xh=#{xh} and xq=#{semester} and kh=#{kh}
+  </select>
+
+
+</mapper>

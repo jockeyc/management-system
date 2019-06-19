@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.demo.dao.CourseInfoMapper">
+    <resultMap id="BaseResultMap" type="demo.demo.model.CourseInfo">
+        <result column="kh" jdbcType="NCHAR" property="kh"/>
+        <result column="km" jdbcType="NCHAR" property="km"/>
+        <result column="gh" jdbcType="NCHAR" property="gh"/>
+        <result column="xf" jdbcType="INTEGER" property="xf"/>
+        <result column="xm" jdbcType="NCHAR" property="xm"/>
+        <result column="xs" jdbcType="INTEGER" property="xs"/>
+        <result column="sksj" jdbcType="NCHAR" property="sksj"/>
+        <result column="xymc" jdbcType="NCHAR" property="xymc"/>
+    </resultMap>
+
+    <select id="getByXq" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select C.kh,km,T.gh,xf,xm,xs,sksj,mc as xymc
+	from O left outer join C on O.kh=C.kh
+	left outer join D on C.yxh=D.yxh
+	left outer join T on O.gh=T.gh
+	where xq = #{xq}
+    </select>
+
+    <select id="getByKh" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select C.kh,km,T.gh,xf,xm,xs,sksj,mc as xymc
+	from O left outer join C on O.kh=C.kh
+	left outer join D on C.yxh=D.yxh
+	left outer join T on O.gh=T.gh
+	where xq = #{xq} and C.kh like '%${kh}%'
+    </select>
+
+    <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select C.kh,km,T.gh,xf,xm,xs,sksj,mc as xymc
+	from O left outer join C on O.kh=C.kh
+	left outer join D on C.yxh=D.yxh
+	left outer join T on O.gh=T.gh
+	where xq = #{xq} and C.km like '%${name}%'
+    </select>
+
+    <select id="getByKhName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select C.kh,km,T.gh,xf,xm,xs,sksj,mc as xymc
+	from O left outer join C on O.kh=C.kh
+	left outer join D on C.yxh=D.yxh
+	left outer join T on O.gh=T.gh
+	where xq = #{xq} and C.kh like '%${kh}%' and C.km like '%${name}%'
+    </select>
+
+    <select id="getByXhXq" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select xh,C.kh,km,T.gh,xf,xm,xs,sksj,mc as xymc
+	from E left outer join O on E.kh=O.kh and E.gh=O.gh and E.xq=O.xq
+	left outer join C on O.kh=C.kh
+	left outer join D on C.yxh=D.yxh
+	left outer join T on O.gh=T.gh
+	where E.xq = #{xq} and E.xh = #{xh}
+    </select>
+</mapper>

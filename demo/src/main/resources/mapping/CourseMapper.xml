@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.demo.dao.CourseMapper">
+  <resultMap id="BaseResultMap" type="demo.demo.model.Course">
+    <result column="kh" jdbcType="NCHAR" property="kh" />
+    <result column="km" jdbcType="NCHAR" property="km" />
+    <result column="xf" jdbcType="INTEGER" property="xf" />
+    <result column="xs" jdbcType="INTEGER" property="xs" />
+    <result column="yxh" jdbcType="NCHAR" property="yxh" />
+  </resultMap>
+  <insert id="insert" parameterType="demo.demo.model.Course">
+    insert into C (kh, km, xf, xs, 
+      yxh)
+    values (#{kh,jdbcType=NCHAR}, #{km,jdbcType=NCHAR}, #{xf,jdbcType=INTEGER}, #{xs,jdbcType=INTEGER}, 
+      #{yxh,jdbcType=NCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="demo.demo.model.Course">
+    insert into C
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="kh != null">
+        kh,
+      </if>
+      <if test="km != null">
+        km,
+      </if>
+      <if test="xf != null">
+        xf,
+      </if>
+      <if test="xs != null">
+        xs,
+      </if>
+      <if test="yxh != null">
+        yxh,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="kh != null">
+        #{kh,jdbcType=NCHAR},
+      </if>
+      <if test="km != null">
+        #{km,jdbcType=NCHAR},
+      </if>
+      <if test="xf != null">
+        #{xf,jdbcType=INTEGER},
+      </if>
+      <if test="xs != null">
+        #{xs,jdbcType=INTEGER},
+      </if>
+      <if test="yxh != null">
+        #{yxh,jdbcType=NCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

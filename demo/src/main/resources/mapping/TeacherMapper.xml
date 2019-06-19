@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.demo.dao.TeacherMapper">
+  <resultMap id="BaseResultMap" type="demo.demo.model.Teacher">
+    <result column="gh" jdbcType="NCHAR" property="gh" />
+    <result column="xm" jdbcType="NCHAR" property="xm" />
+    <result column="xb" jdbcType="NCHAR" property="xb" />
+    <result column="csrq" jdbcType="DATE" property="csrq" />
+    <result column="xl" jdbcType="NCHAR" property="xl" />
+    <result column="jbgz" jdbcType="NUMERIC" property="jbgz" />
+    <result column="yxh" jdbcType="NCHAR" property="yxh" />
+  </resultMap>
+  <select id="getById" parameterType="java.lang.String" resultType="demo.demo.model.Teacher">
+    select * from T
+        where gh = #{id}
+  </select>
+</mapper>

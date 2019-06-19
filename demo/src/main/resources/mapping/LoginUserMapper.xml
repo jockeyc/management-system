@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.demo.dao.LoginUserMapper">
+  <resultMap id="BaseResultMap" type="demo.demo.model.LoginUser">
+    <id column="id" jdbcType="NCHAR" property="id" />
+    <result column="pwd" jdbcType="NCHAR" property="pwd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pwd
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Login
+    where id = #{id,jdbcType=NCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from Login
+    where id = #{id,jdbcType=NCHAR}
+  </delete>
+  <insert id="insert" parameterType="demo.demo.model.LoginUser">
+    insert into Login (id, pwd)
+    values (#{id,jdbcType=NCHAR}, #{pwd,jdbcType=NCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="demo.demo.model.LoginUser">
+    insert into Login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=NCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="demo.demo.model.LoginUser">
+    update Login
+    <set>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=NCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=NCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="demo.demo.model.LoginUser">
+    update Login
+    set pwd = #{pwd,jdbcType=NCHAR}
+    where id = #{id,jdbcType=NCHAR}
+  </update>
+  <select id="isPwdTrue" parameterType="demo.demo.model.LoginUser" resultType="boolean">
+    select count(id)
+        from Login
+    where id = #{id,jdbcType=NCHAR} and pwd = #{pwd,jdbcType=NCHAR}
+  </select>
+</mapper>

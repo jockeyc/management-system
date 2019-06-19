@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.demo.dao.GradeInfoMapper">
+  <resultMap id="BaseResultMap" type="demo.demo.model.GradeInfo">
+    <result column="xh" jdbcType="NCHAR" property="xh" />
+    <result column="kh" jdbcType="NCHAR" property="kh" />
+    <result column="km" jdbcType="NCHAR" property="km" />
+    <result column="xf" jdbcType="INTEGER" property="xf" />
+    <result column="pscj" jdbcType="INTEGER" property="pscj" />
+    <result column="kscj" jdbcType="INTEGER" property="kscj" />
+    <result column="zpcj" jdbcType="INTEGER" property="zpcj" />
+  </resultMap>
+  <select id="getGradeByIdSemester" parameterType="String" resultType="demo.demo.model.GradeInfo">
+    select xh,e.kh,km,xf,pscj,kscj,zpcj from E left outer join C on E.kh=C.kh
+        where xh=#{xh} and xq=#{xq}
+  </select>
+
+  <select id="getSemester" resultType="String">
+    select distinct xq from E order by xq
+  </select>
+
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.demo.dao.GradeForTeacherMapper">
+  <resultMap id="BaseResultMap" type="demo.demo.model.GradeForTeacher">
+    <result column="xh" jdbcType="NCHAR" property="xh" />
+    <result column="xm" jdbcType="NCHAR" property="kh" />
+    <result column="pscj" jdbcType="INTEGER" property="pscj" />
+    <result column="kscj" jdbcType="INTEGER" property="kscj" />
+    <result column="zpcj" jdbcType="INTEGER" property="zpcj" />
+  </resultMap>
+  <select id="getCourse" parameterType="String" resultType="String">
+    select distinct km from E left outer join C on E.kh=C.kh
+        where gh=#{gh} and xq=#{xq}
+  </select>
+  <select id="getCourseGrade" parameterType="String" resultType="demo.demo.model.GradeForTeacher">
+    select E.xh,xm,pscj,kscj,zpcj from E
+	left outer join S on E.xh = S.xh
+	left outer join C on E.kh = C.kh
+        where gh=#{gh} and xq=#{xq} and C.km=#{km}
+  </select>
+  <update id="update" parameterType="demo.demo.model.Selection" >
+    update E
+    set pscj=#{pscj},kscj=#{kscj},zpcj=#{zpcj}
+    where xh = #{xh} and xq = #{xq} and gh = #{gh} and kh in (select kh from C where C.km = #{kh})
+  </update>
+
+  <select id="getStudentsInfo" parameterType="String" resultType="demo.demo.model.StudentsInfo" >
+    select E.xh,xm,xb,mc as xy,sjhm from E
+	left outer join S on E.xh = S.xh
+	left outer join C on E.kh = C.kh
+	left outer join D on S.yxh=D.yxh
+        where gh=#{gh} and xq=#{xq} and C.km=#{km}
+  </select>
+
+
+
+</mapper>
